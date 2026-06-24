@@ -1,0 +1,41 @@
+import java.util.*;
+
+class Item {
+    int value, weight;
+
+    Item(int v, int w) {
+        value = v;
+        weight = w;
+    }
+}
+
+public class FractionalKnapsack {
+    public static void main(String[] args) {
+
+        Item[] items = {
+                new Item(60, 10),
+                new Item(100, 20),
+                new Item(120, 30)
+        };
+
+        int capacity = 50;
+
+        Arrays.sort(items, (a, b) ->
+                Double.compare((double)b.value / b.weight,
+                               (double)a.value / a.weight));
+
+        double result = 0;
+
+        for (Item i : items) {
+            if (capacity >= i.weight) {
+                capacity -= i.weight;
+                result += i.value;
+            } else {
+                result += ((double) i.value / i.weight) * capacity;
+                break;
+            }
+        }
+
+        System.out.println("Maximum Learning Value = " + result);
+    }
+}
