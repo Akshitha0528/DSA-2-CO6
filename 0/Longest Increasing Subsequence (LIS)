@@ -1,0 +1,25 @@
+import java.util.*;
+
+public class LIS {
+    public static void main(String[] args) {
+
+        int scores[] = {45, 50, 55, 48, 60, 65, 70, 58};
+
+        int n = scores.length;
+        int dp[] = new int[n];
+
+        Arrays.fill(dp, 1);
+
+        int ans = 1;
+
+        for (int i = 1; i < n; i++) {
+            for (int j = 0; j < i; j++) {
+                if (scores[i] > scores[j])
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+            }
+            ans = Math.max(ans, dp[i]);
+        }
+
+        System.out.println("Length of LIS = " + ans);
+    }
+}
